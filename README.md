@@ -4,7 +4,7 @@ A full-stack email scheduling application that allows authenticated users to sch
 
 ---
 
-## 🚀 Features
+## Features
 
 - Google OAuth authentication
 - Session-based login (cookies)
@@ -21,7 +21,7 @@ A full-stack email scheduling application that allows authenticated users to sch
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React + TypeScript
@@ -115,7 +115,7 @@ VITE_API_URL=http://localhost:4000
 
 ---
 
-## ▶️ Running Locally
+## Running Locally
 
 ### Prerequisites
 - Node.js
@@ -145,16 +145,6 @@ npm run dev
 
 - Frontend can be deployed on **Netlify**
 - Backend can be deployed on **Render**
-
----
-
-## ✅ Assignment Compliance
-
-- ✔ No cron jobs
-- ✔ Persistent job queue
-- ✔ Delayed scheduling
-- ✔ Authentication
-- ✔ Scalable worker design
 
 ---
 
