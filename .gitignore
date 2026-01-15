@@ -1,0 +1,40 @@
+# =========================
+# Node / JS
+# =========================
+node_modules/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+.env.example
+
+# =========================
+# Build outputs
+# =========================
+dist/
+build/
+
+# =========================
+# Vite / React
+# =========================
+.vite/
+vite.config.ts.timestamp-*
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+
+# =========================
+# Database / Runtime
+# =========================
+redis-data/
+mongodb-data/
