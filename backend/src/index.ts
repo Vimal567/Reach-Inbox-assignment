@@ -26,11 +26,18 @@ app.use(
 app.use(express.json());
 
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET!,
-        resave: false,
-        saveUninitialized: false
-    })
+  session({
+    name: "reachinbox.sid",
+    secret: process.env.SESSION_SECRET!,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000
+    }
+  })
 );
 
 app.use(passport.initialize());
