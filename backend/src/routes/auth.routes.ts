@@ -7,7 +7,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 router.get("/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
-  (_, res) => res.redirect("http://localhost:5173")
+  (_, res) => res.redirect("https://vimal-reach-inbox.netlify.app")
 );
 
 router.get("/me", (req, res) => {
@@ -21,7 +21,7 @@ router.get("/logout", (req, res) => {
   req.logout(() => {
     req.session.destroy(() => {
       res.clearCookie("connect.sid");
-      res.redirect("http://localhost:5173");
+      res.redirect("https://vimal-reach-inbox.netlify.app");
     });
   });
 });
