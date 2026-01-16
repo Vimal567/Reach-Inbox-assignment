@@ -6,7 +6,7 @@ const router = Router();
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 router.get("/google/callback",
-  passport.authenticate("google", { failureRedirect: "/auth/failed" }),
+  passport.authenticate("google", { failureRedirect: "/" }),
   (_, res) => res.redirect("https://vimal-reach-inbox.netlify.app")
 );
 
