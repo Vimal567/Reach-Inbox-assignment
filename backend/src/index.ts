@@ -12,6 +12,8 @@ import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 await connectDB();
 
 app.use(
