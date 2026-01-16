@@ -15,7 +15,6 @@ export default function App() {
   const [scheduled, setScheduled] = useState<any[]>([]);
   const [sent, setSent] = useState<any[]>([]);
 
-
   useEffect(() => {
     getMe().then((res) => {
       setUser(res?.user ?? null);
@@ -32,7 +31,9 @@ export default function App() {
   }, [activeTab]);
 
 
-  if (loading) return <p className="m-5">Loading...</p>;
+  if (loading) {
+    return <div className="container vh-100 d-flex justify-content-center align-items-center">Loading may take upto one minute...</div>
+  };
 
   if (!user) {
     return (
@@ -40,11 +41,8 @@ export default function App() {
         <div className="card">
           <div className="card-body text-center gap-2">
             <h3>Reach Inbox Email Scheduler</h3>
-              <h4 className="lead">Click to login using your google account</h4>
-            <a
-              href="http://localhost:4000/auth/google"
-              className="btn btn-danger mt-3"
-            >
+            <h4 className="lead">Click to login using your google account</h4>
+            <a className="btn btn-danger mt-3" href="https://reach-inbox-assignment-syvt.onrender.com/auth/google">
               Google ✉︎
             </a>
           </div>

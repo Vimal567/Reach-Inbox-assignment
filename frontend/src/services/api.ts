@@ -4,17 +4,24 @@ export const API_URL = "https://reach-inbox-assignment-syvt.onrender.com";
 
 const api = axios.create({
     baseURL: API_URL,
-    withCredentials: true
+    withCredentials: true,
+    headers: {
+        "Content-Type": "application/json",
+    },
 });
+
+// AUTH 
 
 export async function getMe() {
     try {
         const res = await api.get("/auth/me");
         return res.data;
-    } catch (err) {
+    } catch {
         return null;
     }
 }
+
+// EMAILS
 
 export async function getScheduledEmails() {
     const res = await api.get("/api/emails/scheduled");
@@ -23,5 +30,10 @@ export async function getScheduledEmails() {
 
 export async function getSentEmails() {
     const res = await api.get("/api/emails/sent");
+    return res.data;
+}
+
+export async function scheduleEmail(payload: any) {
+    const res = await api.post("/api/emails/schedule", payload);
     return res.data;
 }

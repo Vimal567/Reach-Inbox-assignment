@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Props } from "../model/app.model";
+import { scheduleEmail } from "../services/api";
 
 export default function ComposeModal({ onClose, onSuccess, email }: Props) {
 
@@ -30,41 +31,48 @@ export default function ComposeModal({ onClose, onSuccess, email }: Props) {
   async function submit() {
     setLoading(true);
 
-    const baseTime = new Date(scheduledAt).getTime();
+    try {
+      const baseTime = new Date(scheduledAt).getTime();
 
-    for (let i = 0; i < emails.length; i++) {
-      await fetch("http://localhost:4000/api/emails/schedule", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          to: emails[i],
-          subject,
-          body,
-          scheduledAt: new Date(baseTime + i * 2000).toISOString()
-        })
-      });
+      const requests = [];
+
+      // Multiple emails when csv added
+      if (emails?.length) {
+        emails.forEach((email, index) => {
+          requests.push(
+            scheduleEmail({
+              to: email,
+              subject,
+              body,
+              scheduledAt: new Date(baseTime + index * 2000).toISOString()
+            })
+          );
+        });
+      }
+
+      // Single email
+      if (to?.length) {
+        requests.push(
+          scheduleEmail({
+            to,
+            subject,
+            body,
+            scheduledAt: new Date(baseTime).toISOString()
+          })
+        );
+      }
+
+      // Execute all requests in parallel
+      await Promise.all(requests);
+
+      onSuccess();
+      onClose();
+    } catch (error) {
+      console.error("Failed to schedule emails:", error);
+    } finally {
+      setLoading(false);
     }
-
-    if (to.length) {
-      await fetch("http://localhost:4000/api/emails/schedule", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          to,
-          subject,
-          body,
-          scheduledAt,
-        }),
-      });
-    }
-
-    setLoading(false);
-    onSuccess();
-    onClose();
   }
-
 
   return (
     <div className="modal d-block" style={{ background: "rgba(0,0,0,0.5)" }}>
@@ -133,7 +141,7 @@ export default function ComposeModal({ onClose, onSuccess, email }: Props) {
             <button
               className="btn btn-primary"
               onClick={submit}
-              disabled={loading || (!emails.length && !to.length)}
+              disabled={loading || (!emails.length && !to.length) || email}
             >
               {loading ? "Scheduling..." : "Schedule"}
             </button>

@@ -28,7 +28,7 @@ export default function Header({ user }: Props) {
           </div>
         </div>
         <a
-          href="http://localhost:4000/auth/logout"
+          href="https://reach-inbox-assignment-syvt.onrender.com/auth/logout"
           className="btn btn-outline-secondary btn-sm"
         >
           Logout
