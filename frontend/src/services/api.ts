@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = "http://localhost:4000";
+export const API_URL = "https://reach-inbox-assignment-syvt.onrender.com";
 
 const api = axios.create({
     baseURL: API_URL,
