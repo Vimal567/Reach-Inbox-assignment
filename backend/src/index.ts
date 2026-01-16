@@ -16,7 +16,7 @@ await connectDB();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://vimal-reach-inbox.netlify.app"],
     credentials: true
   })
 );
