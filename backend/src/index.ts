@@ -34,6 +34,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use("/", (_, res) => res.send('Api working') );
 app.use("/auth", authRoutes);
 app.use("/api/emails", emailRoutes);
 
